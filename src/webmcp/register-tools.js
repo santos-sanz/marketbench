@@ -1,0 +1,19 @@
+import { advanceWeek, finishRun, publicState, stagePrices } from '../market/engine.js';
+
+const NO_ARGS = { type: 'object', properties: {}, additionalProperties: false };
+export async function registerMarketTools({ getRun, onEvent, onChange }) {
+  const modelContext = document.modelContext;
+  if (!modelContext?.registerTool) return { available: false, dispose() {} };
+  const controllers = [];
+  const register = async tool => { const controller = new AbortController(); controllers.push(controller); await modelContext.registerTool(tool, { signal: controller.signal }); };
+  const invoke = async (name, args, fn) => { try { const result = await fn(); onEvent({ name, args, result, valid: true }); onChange(); return result; } catch (error) { const result = { error: error.message }; onEvent({ name, args, result, valid: false }); onChange(); return result; } };
+  await register({ name: 'get_benchmark_rules', description: 'Read the locked benchmark objective, limits, active scenario, seed and week.', inputSchema: NO_ARGS, execute: () => invoke('get_benchmark_rules', {}, () => ({ objective: 'Maximize the benchmark score over 12 weeks', limits: { actionCallsPerWeek: 4, priceUpdatesPerWeek: 1 }, scoringWeights: { adjustedProfit: 45, serviceLevel: 20, shockAdaptation: 15, stability: 10, agentDiscipline: 10 }, ...publicState(getRun()) })) });
+  await register({ name: 'get_market_state', description: 'Read only market information available to a manager at the start of the current week.', inputSchema: NO_ARGS, execute: () => invoke('get_market_state', {}, () => publicState(getRun())) });
+  await register({ name: 'get_sales_history', description: 'Read a compact window of prior weekly sales.', inputSchema: { type: 'object', properties: { window: { type: 'integer', minimum: 1, maximum: 4 } }, required: ['window'], additionalProperties: false }, execute: ({ window }) => invoke('get_sales_history', { window }, () => ({ history: getRun().history.slice(-window) })) });
+  const activeControllers = [];
+  const registerActive = async tool => { const controller = new AbortController(); controllers.push(controller); activeControllers.push(controller); await modelContext.registerTool(tool, { signal: controller.signal }); };
+  await registerActive({ name: 'set_prices', description: 'Stage exactly one complete price update for the current week.', inputSchema: { type: 'object', properties: { prices: { type: 'array', minItems: 3, maxItems: 3, items: { type: 'object', properties: { product_id: { type: 'string', enum: ['water', 'cola', 'chips'] }, price: { type: 'number', minimum: 0.8, maximum: 5 } }, required: ['product_id', 'price'], additionalProperties: false } }, rationale: { type: 'string', maxLength: 240 } }, required: ['prices', 'rationale'], additionalProperties: false }, execute: args => invoke('set_prices', args, () => stagePrices(getRun(), args)) });
+  await registerActive({ name: 'advance_week', description: 'Apply staged prices and simulate exactly one week. Rejects a stale expected_week.', inputSchema: { type: 'object', properties: { expected_week: { type: 'integer', minimum: 1, maximum: 12 } }, required: ['expected_week'], additionalProperties: false }, execute: args => invoke('advance_week', args, () => advanceWeek(getRun(), args)) });
+  await registerActive({ name: 'finish_run', description: 'Close a 12-week run and return measured totals. Final normalized score remains null until oracle calibration is published.', inputSchema: { type: 'object', properties: { expected_week: { type: 'integer', const: 13 } }, required: ['expected_week'], additionalProperties: false }, execute: args => invoke('finish_run', args, () => { const result = finishRun(getRun(), args); activeControllers.forEach(c => c.abort()); return result; }) });
+  return { available: true, dispose() { controllers.forEach(c => c.abort()); } };
+}
