@@ -1,4 +1,5 @@
 import { PRODUCTS, SCENARIOS, competitorPrice, scenarioMultipliers } from './scenarios.js';
+import { scoreRun } from '../benchmark/scoring.js';
 
 const round = value => Math.round(value * 100) / 100;
 function rng(seed) { let state = seed >>> 0; return () => ((state = (1664525 * state + 1013904223) >>> 0) / 4294967296); }
@@ -66,7 +67,8 @@ export function finishRun(run, { expected_week }) {
   if (expected_week !== 13) return invalid(run, 'Finish expects week 13');
   run.status = 'completed';
   const service = run.history.flatMap(w => w.products).reduce((a, p) => ({ sold: a.sold + p.sold, demand: a.demand + p.demand }), { sold: 0, demand: 0 });
-  return { runId: run.runId, status: run.status, profit: run.cumulativeProfit, serviceLevel: round(service.sold / service.demand), invalidCalls: run.invalidCalls, score: null, scoreStatus: 'oracle-not-yet-calibrated' };
+  const scored = scoreRun(run);
+  return { runId: run.runId, status: run.status, profit: run.cumulativeProfit, serviceLevel: round(service.sold / service.demand), invalidCalls: run.invalidCalls, ...scored, scoreStatus: scored ? 'calibrated-v1' : 'unscored' };
 }
 
 function countCall(run) { run.callsThisWeek += 1; if (run.callsThisWeek > 4) throw new Error('Weekly action-call budget exceeded'); }
