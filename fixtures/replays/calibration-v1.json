@@ -1,0 +1,168 @@
+{
+  "generatedBy": "npm run calibrate",
+  "benchmarkVersion": "0.1.0",
+  "rows": [
+    {
+      "scenarioId": "normal-market",
+      "seed": 17,
+      "strategy": "baseline",
+      "profit": 2992.35,
+      "serviceLevel": 1,
+      "shockProfit": 994.3,
+      "score": 40
+    },
+    {
+      "scenarioId": "normal-market",
+      "seed": 17,
+      "strategy": "oracle",
+      "profit": 3237.18,
+      "serviceLevel": 1,
+      "shockProfit": 1076.43,
+      "score": 99.85
+    },
+    {
+      "scenarioId": "normal-market",
+      "seed": 42,
+      "strategy": "baseline",
+      "profit": 3033.1,
+      "serviceLevel": 1,
+      "shockProfit": 1041.05,
+      "score": 40
+    },
+    {
+      "scenarioId": "normal-market",
+      "seed": 42,
+      "strategy": "oracle",
+      "profit": 3273.12,
+      "serviceLevel": 1,
+      "shockProfit": 1123.35,
+      "score": 99.86
+    },
+    {
+      "scenarioId": "normal-market",
+      "seed": 91,
+      "strategy": "baseline",
+      "profit": 2985.2,
+      "serviceLevel": 1,
+      "shockProfit": 1012.75,
+      "score": 40
+    },
+    {
+      "scenarioId": "normal-market",
+      "seed": 91,
+      "strategy": "oracle",
+      "profit": 3229.86,
+      "serviceLevel": 1,
+      "shockProfit": 1094.03,
+      "score": 99.85
+    },
+    {
+      "scenarioId": "heatwave",
+      "seed": 17,
+      "strategy": "baseline",
+      "profit": 3377.15,
+      "serviceLevel": 0.99,
+      "shockProfit": 1379.1,
+      "score": 39.71
+    },
+    {
+      "scenarioId": "heatwave",
+      "seed": 17,
+      "strategy": "oracle",
+      "profit": 3661.11,
+      "serviceLevel": 1,
+      "shockProfit": 1500.36,
+      "score": 99.82
+    },
+    {
+      "scenarioId": "heatwave",
+      "seed": 42,
+      "strategy": "baseline",
+      "profit": 3375.55,
+      "serviceLevel": 0.97,
+      "shockProfit": 1383.5,
+      "score": 39.34
+    },
+    {
+      "scenarioId": "heatwave",
+      "seed": 42,
+      "strategy": "oracle",
+      "profit": 3720.56,
+      "serviceLevel": 1,
+      "shockProfit": 1570.79,
+      "score": 99.84
+    },
+    {
+      "scenarioId": "heatwave",
+      "seed": 91,
+      "strategy": "baseline",
+      "profit": 3351.65,
+      "serviceLevel": 0.97,
+      "shockProfit": 1379.2,
+      "score": 39.49
+    },
+    {
+      "scenarioId": "heatwave",
+      "seed": 91,
+      "strategy": "oracle",
+      "profit": 3667.52,
+      "serviceLevel": 1,
+      "shockProfit": 1531.69,
+      "score": 99.83
+    },
+    {
+      "scenarioId": "price-war",
+      "seed": 17,
+      "strategy": "baseline",
+      "profit": 2698.75,
+      "serviceLevel": 1,
+      "shockProfit": 700.7,
+      "score": 40
+    },
+    {
+      "scenarioId": "price-war",
+      "seed": 17,
+      "strategy": "oracle",
+      "profit": 2942.35,
+      "serviceLevel": 1,
+      "shockProfit": 781.6,
+      "score": 99.81
+    },
+    {
+      "scenarioId": "price-war",
+      "seed": 42,
+      "strategy": "baseline",
+      "profit": 2720.7,
+      "serviceLevel": 1,
+      "shockProfit": 728.65,
+      "score": 40
+    },
+    {
+      "scenarioId": "price-war",
+      "seed": 42,
+      "strategy": "oracle",
+      "profit": 2963.14,
+      "serviceLevel": 1,
+      "shockProfit": 813.37,
+      "score": 99.86
+    },
+    {
+      "scenarioId": "price-war",
+      "seed": 91,
+      "strategy": "baseline",
+      "profit": 2681.9,
+      "serviceLevel": 1,
+      "shockProfit": 709.45,
+      "score": 40
+    },
+    {
+      "scenarioId": "price-war",
+      "seed": 91,
+      "strategy": "oracle",
+      "profit": 2927.83,
+      "serviceLevel": 1,
+      "shockProfit": 792,
+      "score": 99.85
+    }
+  ]
+}
