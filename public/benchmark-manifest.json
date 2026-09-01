@@ -1,0 +1,12 @@
+{
+  "benchmarkVersion": "0.1.0",
+  "durationWeeks": 12,
+  "officialSeeds": [17, 42, 91],
+  "scenarios": ["normal-market", "heatwave", "price-war"],
+  "limits": { "maxActionCallsPerWeek": 4, "maxPriceUpdatesPerWeek": 1 },
+  "score": {
+    "status": "scaffold",
+    "weights": { "adjustedProfit": 45, "serviceLevel": 20, "shockAdaptation": 15, "stability": 10, "agentDiscipline": 10 },
+    "note": "Weights are frozen for the scaffold; baseline/oracle constants must be measured and published before results are claimed."
+  }
+}
