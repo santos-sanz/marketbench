@@ -1,0 +1,4 @@
+import test from 'node:test'; import assert from 'node:assert/strict'; import { createRun, stagePrices, advanceWeek } from '../src/market/engine.js';
+const prices = { prices: [{ product_id: 'water', price: 1.5 }, { product_id: 'cola', price: 2 }, { product_id: 'chips', price: 1.8 }], rationale: 'baseline' };
+test('same scenario, seed and actions produce the same market log', () => { const play = () => { const r = createRun({ scenarioId: 'heatwave', seed: 42 }); for (let w=1;w<=12;w++) { stagePrices(r, prices); advanceWeek(r, { expected_week: w }); } return r.history; }; assert.deepEqual(play(), play()); });
+test('stale week is rejected without advancing state', () => { const r = createRun({ seed: 17 }); stagePrices(r, prices); assert.throws(() => advanceWeek(r, { expected_week: 2 }), /Stale call/); assert.equal(r.week, 1); });
