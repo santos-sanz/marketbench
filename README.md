@@ -4,7 +4,7 @@ MarketBench is a reproducible WebMCP benchmark for browser agents making economi
 
 ## Live demo
 
-The live URL will be listed here after deployment. In a regular browser, choose a scenario and official seed, then click **Play measured demo** to see all twelve weeks, score components, trace, and state hashes. In ChatGPT's in-app browser or Chrome 149+ with WebMCP enabled, an agent gets the typed tools directly.
+**Live demo:** https://marketbench.vercel.app/ In a regular browser, choose a scenario and official seed, then click **Play measured demo** to see all twelve weeks, score components, trace, and state hashes. In ChatGPT's in-app browser or Chrome 149+ with WebMCP enabled, an agent gets the typed tools directly.
 
 ## Why WebMCP
 
