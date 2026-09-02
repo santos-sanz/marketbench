@@ -1,0 +1,231 @@
+{
+  "generatedBy": "npm run compare",
+  "benchmarkVersion": "0.2.0",
+  "disclosure": "Measured deterministic policy replays, not claimed as LLM outputs. This fixture exists to validate the comparison harness until named model runs are executed.",
+  "rows": [
+    {
+      "policy": "launch-price-baseline",
+      "scenarioId": "normal-market",
+      "seed": 17,
+      "score": 40,
+      "profit": 2992.35,
+      "serviceLevel": 1
+    },
+    {
+      "policy": "signal-aware-policy",
+      "scenarioId": "normal-market",
+      "seed": 17,
+      "score": 48.08,
+      "profit": 3023.9,
+      "serviceLevel": 1
+    },
+    {
+      "policy": "launch-price-baseline",
+      "scenarioId": "normal-market",
+      "seed": 42,
+      "score": 40,
+      "profit": 3033.1,
+      "serviceLevel": 1
+    },
+    {
+      "policy": "signal-aware-policy",
+      "scenarioId": "normal-market",
+      "seed": 42,
+      "score": 47.27,
+      "profit": 3061.8,
+      "serviceLevel": 1
+    },
+    {
+      "policy": "launch-price-baseline",
+      "scenarioId": "normal-market",
+      "seed": 91,
+      "score": 40,
+      "profit": 2985.2,
+      "serviceLevel": 1
+    },
+    {
+      "policy": "signal-aware-policy",
+      "scenarioId": "normal-market",
+      "seed": 91,
+      "score": 47.27,
+      "profit": 3015.86,
+      "serviceLevel": 1
+    },
+    {
+      "policy": "launch-price-baseline",
+      "scenarioId": "heatwave",
+      "seed": 17,
+      "score": 39.71,
+      "profit": 3377.15,
+      "serviceLevel": 0.99
+    },
+    {
+      "policy": "signal-aware-policy",
+      "scenarioId": "heatwave",
+      "seed": 17,
+      "score": 53.78,
+      "profit": 3434.7,
+      "serviceLevel": 1
+    },
+    {
+      "policy": "launch-price-baseline",
+      "scenarioId": "heatwave",
+      "seed": 42,
+      "score": 39.34,
+      "profit": 3375.55,
+      "serviceLevel": 0.97
+    },
+    {
+      "policy": "signal-aware-policy",
+      "scenarioId": "heatwave",
+      "seed": 42,
+      "score": 64.18,
+      "profit": 3497.83,
+      "serviceLevel": 1
+    },
+    {
+      "policy": "launch-price-baseline",
+      "scenarioId": "heatwave",
+      "seed": 91,
+      "score": 39.49,
+      "profit": 3351.65,
+      "serviceLevel": 0.97
+    },
+    {
+      "policy": "signal-aware-policy",
+      "scenarioId": "heatwave",
+      "seed": 91,
+      "score": 59.78,
+      "profit": 3443.14,
+      "serviceLevel": 1
+    },
+    {
+      "policy": "launch-price-baseline",
+      "scenarioId": "price-war",
+      "seed": 17,
+      "score": 40,
+      "profit": 2698.75,
+      "serviceLevel": 1
+    },
+    {
+      "policy": "signal-aware-policy",
+      "scenarioId": "price-war",
+      "seed": 17,
+      "score": 42.33,
+      "profit": 2712.22,
+      "serviceLevel": 1
+    },
+    {
+      "policy": "launch-price-baseline",
+      "scenarioId": "price-war",
+      "seed": 42,
+      "score": 40,
+      "profit": 2720.7,
+      "serviceLevel": 1
+    },
+    {
+      "policy": "signal-aware-policy",
+      "scenarioId": "price-war",
+      "seed": 42,
+      "score": 42.5,
+      "profit": 2735.04,
+      "serviceLevel": 1
+    },
+    {
+      "policy": "launch-price-baseline",
+      "scenarioId": "price-war",
+      "seed": 91,
+      "score": 40,
+      "profit": 2681.9,
+      "serviceLevel": 1
+    },
+    {
+      "policy": "signal-aware-policy",
+      "scenarioId": "price-war",
+      "seed": 91,
+      "score": 43.2,
+      "profit": 2700.26,
+      "serviceLevel": 1
+    }
+  ],
+  "aggregates": [
+    {
+      "policy": "launch-price-baseline",
+      "scenarioId": "normal-market",
+      "seeds": [
+        17,
+        42,
+        91
+      ],
+      "meanScore": 40,
+      "standardDeviation": 0,
+      "worstSeedScore": 40,
+      "meanProfit": 3003.55
+    },
+    {
+      "policy": "signal-aware-policy",
+      "scenarioId": "normal-market",
+      "seeds": [
+        17,
+        42,
+        91
+      ],
+      "meanScore": 47.54,
+      "standardDeviation": 0.38,
+      "worstSeedScore": 47.27,
+      "meanProfit": 3033.85
+    },
+    {
+      "policy": "launch-price-baseline",
+      "scenarioId": "heatwave",
+      "seeds": [
+        17,
+        42,
+        91
+      ],
+      "meanScore": 39.51,
+      "standardDeviation": 0.15,
+      "worstSeedScore": 39.34,
+      "meanProfit": 3368.12
+    },
+    {
+      "policy": "signal-aware-policy",
+      "scenarioId": "heatwave",
+      "seeds": [
+        17,
+        42,
+        91
+      ],
+      "meanScore": 59.25,
+      "standardDeviation": 4.26,
+      "worstSeedScore": 53.78,
+      "meanProfit": 3458.56
+    },
+    {
+      "policy": "launch-price-baseline",
+      "scenarioId": "price-war",
+      "seeds": [
+        17,
+        42,
+        91
+      ],
+      "meanScore": 40,
+      "standardDeviation": 0,
+      "worstSeedScore": 40,
+      "meanProfit": 2700.45
+    },
+    {
+      "policy": "signal-aware-policy",
+      "scenarioId": "price-war",
+      "seeds": [
+        17,
+        42,
+        91
+      ],
+      "meanScore": 42.68,
+      "standardDeviation": 0.38,
+      "worstSeedScore": 42.33,
+      "meanProfit": 2715.84
+    }
+  ]
+}
