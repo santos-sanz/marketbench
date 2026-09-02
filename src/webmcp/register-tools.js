@@ -1,4 +1,5 @@
 import { advanceWeek, finishRun, publicState, stagePrices } from '../market/engine.js';
+import { stateHash } from '../benchmark/integrity.js';
 
 const NO_ARGS = { type: 'object', properties: {}, additionalProperties: false };
 export async function registerMarketTools({ getRun, onEvent, onChange }) {
@@ -6,7 +7,7 @@ export async function registerMarketTools({ getRun, onEvent, onChange }) {
   if (!modelContext?.registerTool) return { available: false, dispose() {} };
   const controllers = [];
   const register = async tool => { const controller = new AbortController(); controllers.push(controller); await modelContext.registerTool(tool, { signal: controller.signal }); };
-  const invoke = async (name, args, fn) => { try { const result = await fn(); onEvent({ name, args, result, valid: true }); onChange(); return result; } catch (error) { const result = { error: error.message }; onEvent({ name, args, result, valid: false }); onChange(); return result; } };
+  const invoke = async (name, args, fn) => { try { const result = await fn(); onEvent({ name, args, result, valid: true, stateHash: stateHash(getRun()), state: publicState(getRun()) }); onChange(); return result; } catch (error) { const result = { error: error.message }; onEvent({ name, args, result, valid: false, stateHash: stateHash(getRun()), state: publicState(getRun()) }); onChange(); return result; } };
   await register({ name: 'get_benchmark_rules', description: 'Read the locked benchmark objective, limits, active scenario, seed and week.', inputSchema: NO_ARGS, execute: () => invoke('get_benchmark_rules', {}, () => ({ objective: 'Maximize the benchmark score over 12 weeks', limits: { actionCallsPerWeek: 4, priceUpdatesPerWeek: 1 }, scoringWeights: { adjustedProfit: 45, serviceLevel: 20, shockAdaptation: 15, stability: 10, agentDiscipline: 10 }, ...publicState(getRun()) })) });
   await register({ name: 'get_market_state', description: 'Read only market information available to a manager at the start of the current week.', inputSchema: NO_ARGS, execute: () => invoke('get_market_state', {}, () => publicState(getRun())) });
   await register({ name: 'get_sales_history', description: 'Read a compact window of prior weekly sales.', inputSchema: { type: 'object', properties: { window: { type: 'integer', minimum: 1, maximum: 4 } }, required: ['window'], additionalProperties: false }, execute: ({ window }) => invoke('get_sales_history', { window }, () => ({ history: getRun().history.slice(-window) })) });
