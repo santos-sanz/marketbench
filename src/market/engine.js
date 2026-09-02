@@ -8,7 +8,7 @@ export function createRun({ scenarioId = 'normal-market', seed = 17, agent = 'un
   if (!SCENARIOS[scenarioId]) throw new Error('Unknown scenario');
   if (![17, 42, 91].includes(Number(seed))) throw new Error('Seed is not in the official pack');
   return {
-    benchmarkVersion: '0.1.0', runId: crypto.randomUUID(), scenarioId, seed: Number(seed), agent,
+    benchmarkVersion: '0.2.0', runId: crypto.randomUUID(), scenarioId, seed: Number(seed), agent,
     week: 1, status: 'active', cash: 0, cumulativeProfit: 0, stagedPrices: null, priceUpdatedWeek: null,
     callsThisWeek: 0, invalidCalls: 0, history: [], random: rng(Number(seed)),
     products: PRODUCTS.map(p => ({ ...p, price: p.initialPrice, inventory: p.capacity }))
