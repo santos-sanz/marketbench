@@ -19,3 +19,19 @@ test('published calibration references reproduce exactly', async () => {
     }
   }
 });
+
+test('state hashes are stable and change after a valid mutation', async () => {
+  const { stateHash } = await import('../src/benchmark/integrity.js');
+  const first = createRun({ scenarioId: 'normal-market', seed: 17, agent: 'hash-test' });
+  const second = createRun({ scenarioId: 'normal-market', seed: 17, agent: 'hash-test' });
+  second.runId = first.runId;
+  assert.equal(stateHash(first), stateHash(second));
+  const before = stateHash(first); stagePrices(first, prices); assert.notEqual(stateHash(first), before);
+});
+
+test('published comparison fixture is regenerated from measured policy replays', async () => {
+  const fs = await import('node:fs'); const { comparisonRows } = await import('../src/benchmark/policies.js');
+  const fixture = JSON.parse(fs.readFileSync(new URL('../fixtures/replays/policy-comparison-v1.json', import.meta.url)));
+  assert.deepEqual(fixture.rows, comparisonRows());
+  assert.match(fixture.disclosure, /not claimed as LLM outputs/);
+});
